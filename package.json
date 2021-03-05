@@ -1,0 +1,14 @@
+{
+  "name": "mmm-miflora",
+  "version": "1.0.0",
+  "description": "Magic mirror moduel to monitor miflora bluetooth sensors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arian Suarez",
+  "license": "MIT",
+  "dependencies": {
+    "miflora": "^1.0.6"
+  }
+}

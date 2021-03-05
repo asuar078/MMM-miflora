@@ -1,0 +1,61 @@
+.flora-icon {
+    color: white;
+    padding-bottom: 15px;
+    padding-right: 25px;
+    border-bottom: 1px solid #999;
+}
+
+.flora-name {
+    /*margin-left: 15px;*/
+    padding-left: 0;
+    padding-right: 25px;
+    text-align: left;
+}
+
+.flora-title {
+    text-align: left;
+    width: auto;
+    font-weight: 800;
+    border-bottom: 1px solid white;
+    margin-bottom: 15px;
+}
+
+.flora-title-icon {
+    float: right
+}
+
+.flora-wrapper {
+    /*width: 300px;*/
+    width: auto;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.flora-cell {
+    font-weight: 400;
+    color: grey;
+    font-size: 16pt;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-right: 25px;
+    border-bottom: 1px solid #999;
+}
+
+.flora-row {
+    border-bottom: 1px solid white;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #999;
+}
+
+.flora-table {
+    padding-bottom: 15px;
+    margin-top: 10px;
+}
+
+
+/*td, th {*/
+/*    border-bottom: 1px solid #999;*/
+/*    padding: 0.5rem;*/
+/*}*/
