@@ -1,7 +1,7 @@
 Module.register("MMM-miflora", {
     // Default module config.
     defaults: {
-        updateInterval: 30, // Seconds
+        updateInterval: 60, // Seconds
         titleText: "Plant Life",
         units: "metric",
         tableClass: "small",
@@ -11,44 +11,59 @@ Module.register("MMM-miflora", {
     start: function () {
         Log.info("Starting module: " + this.name);
 
-        // this.sensorValues = []
-        this.sensorValues = [
-            {
-                address: 'c4:7c:8d:6b:ca:9e',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 100, firmware: '3.2.4'},
-                sensorValues: {temperature: 22.4, lux: 230, moisture: 0, fertility: 0},
-                friendlyName: 'lavender',
-                timeStamp: 1614954202204
-            },
-            {
-                address: 'c4:7c:8d:3c:cb:73',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 95, firmware: '3.2.4'},
-                sensorValues: {temperature: 27.4, lux: 700, moisture: 20, fertility: 10},
-                friendlyName: 'c4:7c:8d:3c:cb:73',
-                timeStamp: 1614954202204
-            },
-        ]
+        this.sensorValues = []
+        // this.sensorValues = [
+        //     {
+        //         address: 'c4:7c:8d:6b:ca:9e',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 22.4, lux: 230, moisture: 0, fertility: 0},
+        //         friendlyName: 'lavender',
+        //         timeStamp: 1614954202204
+        //     },
+        //     {
+        //         address: 'c4:7c:8d:3c:cb:73',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 95, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 27.4, lux: 700, moisture: 20, fertility: 10},
+        //         friendlyName: 'c4:7c:8d:3c:cb:73',
+        //         timeStamp: Date.now()
+        //     },
+        // ]
 
-        // if (this.scanInterval === undefined) {
-        //     this.update();
-        //     this.scanInterval = setInterval(
-        //         this.update.bind(this),
-        //         this.config.updateInterval * 1000);
-        // }
+        if (this.scanInterval === undefined) {
+            this.update();
+            this.scanInterval = setInterval(
+                this.update.bind(this),
+                this.config.updateInterval * 1000);
+        }
     },
 
     update: function () {
         this.sendSocketNotification('DATA_REQUEST', this.config);
     },
 
+    getTimeDiffMin(timeStamp) {
+        let startTime = new Date(timeStamp);
+
+        let endTime = new Date()
+        let diff = (endTime.getTime() - startTime.getTime()) / 1000
+        diff /= 60;
+        return Math.abs(Math.round(diff));
+    },
+
     socketNotificationReceived: function (notification, payload) {
         if (notification === 'DATA_RESPONSE') {
-            Log.info(`Data response ${payload.sensorValues.length}`)
+            // Log.info(`Data response ${payload.sensorValues.length}`)
             Log.info(payload)
 
+            if (payload.sensorValues === undefined) {
+                this.updateDom()
+                return;
+            }
+
             if (payload.sensorValues.length === 0) {
+                this.updateDom()
                 return;
             }
 
@@ -62,7 +77,7 @@ Module.register("MMM-miflora", {
                     this.sensorValues[index] = sensors
                 }
             }
-            // this.sensorValues = payload;
+
             this.updateDom()
         }
     },
@@ -73,6 +88,8 @@ Module.register("MMM-miflora", {
 
     // Override dom generator.
     getDom: function () {
+        Log.log("updating dom")
+
         let wrapper = document.createElement("div");
         wrapper.className = "flora-wrapper"
 
@@ -147,10 +164,19 @@ Module.register("MMM-miflora", {
         batteryIcon.className = 'fa fa-battery-full'
         batteryIconCell.appendChild(batteryIcon);
 
+        // add time icon
+        let timeIconCell = document.createElement("td");
+        timeIconCell.className = "flora-icon ";
+        titleRow.appendChild(timeIconCell);
+
+        let timeIcon = document.createElement("span");
+        timeIcon.className = 'fa fa-hourglass-end'
+        timeIconCell.appendChild(timeIcon);
+
         let tableBody = document.createElement('tbody');
         table.appendChild(tableBody)
 
-        for (const sensors of this.sensorValues){
+        for (const sensors of this.sensorValues) {
             // create row
             let row = document.createElement("tr");
             row.className = "flora-row"
@@ -159,7 +185,11 @@ Module.register("MMM-miflora", {
             // add name
             let nameCell = document.createElement("td");
             nameCell.className = "flora-name flora-cell";
-            nameCell.innerHTML = sensors.friendlyName
+            // get name with first letter of words capital
+            nameCell.innerHTML = sensors.friendlyName.toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ')
             row.appendChild(nameCell);
 
             // add temperature
@@ -192,21 +222,34 @@ Module.register("MMM-miflora", {
 
             let lightCell = document.createElement("td");
             let lightVal = sensors.sensorValues.lux.toString()
-            lightCell.innerHTML = lightVal .replace(".", this.config.decimalSymbol)
+            lightCell.innerHTML = lightVal.replace(".", this.config.decimalSymbol)
             lightCell.className = "flora-cell";
             row.appendChild(lightCell);
 
             let moistureCell = document.createElement("td");
             let moistureVal = sensors.sensorValues.moisture.toString()
-            moistureCell.innerHTML = moistureVal .replace(".", this.config.decimalSymbol) + " %"
+            moistureCell.innerHTML = moistureVal.replace(".", this.config.decimalSymbol) + " %"
             moistureCell.className = "flora-cell";
             row.appendChild(moistureCell);
 
             let batteryCell = document.createElement("td");
             let batteryVal = sensors.firmwareInfo.battery.toString()
-            batteryCell.innerHTML = batteryVal .replace(".", this.config.decimalSymbol) + " %"
+            batteryCell.innerHTML = batteryVal.replace(".", this.config.decimalSymbol) + " %"
             batteryCell.className = "flora-cell";
             row.appendChild(batteryCell);
+
+            let timeCell = document.createElement("td");
+
+            let timeDiff = this.getTimeDiffMin(sensors.timeStamp)
+            Log.info(`data time diff: ${timeDiff}`)
+            if (timeDiff > 30) {
+                timeCell.innerHTML = "> 30 min"
+                timeCell.className = "flora-cell flora-bad-data";
+            } else {
+                timeCell.innerHTML = `${timeDiff} min ago`
+                timeCell.className = "flora-cell";
+            }
+            row.appendChild(timeCell);
         }
 
         wrapper.appendChild(table);

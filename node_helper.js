@@ -26,15 +26,18 @@ module.exports = NodeHelper.create({
                 this.scanInProgress = true;
 
                 // execute scan
-                poller.scan().then((sensorValues) => {
-                    // Send data
-                    console.log(`sending result: ${sensorValues}`)
-                    self.sendSocketNotification('DATA_RESPONSE', sensorValues);
+                poller.scan()
+                    .then((sensorValues) => {
+                        // Send data
+                        console.log(`sending result: ${sensorValues}`)
+                        self.sendSocketNotification('DATA_RESPONSE', sensorValues);
 
+                        this.scanInProgress = false;
+                    }).catch((e) => {
+                    console.log(`scan error ${e}`)
                     this.scanInProgress = false;
                 })
-            }
-            else {
+            } else {
                 console.log("scan already in progress")
             }
         }

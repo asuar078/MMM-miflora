@@ -18,10 +18,10 @@ const defaultFriendlyLookup = () => {
     const json = JSON.stringify(friendly)
 
     fs.writeFileSync(NAME_LOOKUP_FILE, json, {
-            encoding: "utf8",
-            flag: "w",
-            mode: 0o666
-        });
+        encoding: "utf8",
+        flag: "w",
+        mode: 0o666
+    });
 }
 
 const updateFriendlyLookup = (address, name) => {
@@ -80,19 +80,32 @@ const discoverOptions = {
 
 const scan = async () => {
     let sensorValues = []
+    let devices = []
 
-    // console.log('starting scan')
-    const devices = await miflora.discover(discoverOptions)
-    // console.log('devices discovered: ', devices.length)
-    for (const dev of devices) {
+    try {
+        console.log('starting scan')
+        devices = await miflora.discover(discoverOptions)
+        console.log('devices discovered: ', devices.length)
+        if (devices.length === 0) {
+            return []
+        }
+    } catch (e) {
+        console.log(`discovery error ${e}`)
+        return []
+    }
+
+
+    for (let dev of devices) {
         try {
-            // console.log(dev)
+            console.log(`query: ${dev.address}`)
             const query = await dev.query()
             query.friendlyName = friendlyNameLookup(query.address)
             query.timeStamp = Date.now()
-            // console.log(query)
+            console.log(query)
             sensorValues.push(query)
+
         } catch (e) {
+            console.log(`query error ${e}`)
         }
     }
 

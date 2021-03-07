@@ -20,6 +20,10 @@
     margin-bottom: 15px;
 }
 
+.flora-bad-data {
+    color: #ff0123;
+}
+
 .flora-title-icon {
     float: right
 }
