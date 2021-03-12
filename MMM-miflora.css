@@ -20,9 +20,6 @@
     margin-bottom: 15px;
 }
 
-.flora-bad-data {
-    color: #ff0123;
-}
 
 .flora-title-icon {
     float: right
@@ -39,13 +36,21 @@
 
 .flora-cell {
     font-weight: 400;
-    color: grey;
     font-size: 16pt;
     padding-top: 10px;
     padding-bottom: 15px;
     padding-right: 25px;
     border-bottom: 1px solid #999;
 }
+
+.flora-good-data {
+    color: grey;
+}
+
+.flora-bad-data {
+    color: #ff0123;
+}
+
 
 .flora-row {
     border-bottom: 1px solid white;

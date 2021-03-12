@@ -4,8 +4,15 @@ const fs = require('fs');
 const NAME_LOOKUP_FILE = './modules/MMM-miflora/friendlyNameLookup.json'
 // const NAME_LOOKUP_FILE = 'friendlyNameLookup.json'
 
-const createFriendlyName = (address, name) => {
-    return {address, name}
+// const createFriendlyName = (address, name) => {
+//     return {address, name}
+// }
+
+class FriendlyName {
+    constructor(address, name) {
+        this.address = address;
+        this.name = name
+    }
 }
 
 const defaultFriendlyLookup = () => {
@@ -13,7 +20,7 @@ const defaultFriendlyLookup = () => {
         lookup: []
     }
 
-    friendly.lookup.push(createFriendlyName('default', 'unknown'))
+    friendly.lookup.push(new FriendlyName('default', 'unknown'))
 
     const json = JSON.stringify(friendly)
 
@@ -37,7 +44,7 @@ const updateFriendlyLookup = (address, name) => {
 
     if (index === -1) {
         console.log("not found adding new entry")
-        friendly.lookup.push(createFriendlyName(address, name))
+        friendly.lookup.push(new FriendlyName(address, name))
     } else {
         console.log("found updating entry")
         friendly.lookup[index].name = name
