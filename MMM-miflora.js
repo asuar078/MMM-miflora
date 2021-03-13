@@ -461,7 +461,7 @@ Module.register("MMM-miflora", {
         Log.log("updating dom")
 
         let wrapper = document.createElement("div");
-        wrapper.className = "flora-wrapper small"
+        wrapper.className = "flora-wrapper"
 
         // Create Title
         let title = document.createElement("p");
@@ -484,7 +484,7 @@ Module.register("MMM-miflora", {
 
 
         let table = document.createElement("table");
-        table.className = this.config.tableClass + "flora-table";
+        table.className = this.config.tableClass + "flora-table small";
 
         this.addTableHeader(table)
 
