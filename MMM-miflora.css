@@ -1,15 +1,20 @@
 .flora-icon {
     color: white;
-    padding-bottom: 15px;
-    padding-right: 25px;
+    padding-bottom: 5px;
+}
+
+.flora-unit-cell {
+    font-weight: 300;
+    font-size: 14pt;
+    color: white;
+    padding-bottom: 10px;
     border-bottom: 1px solid #999;
 }
 
 .flora-name {
-    /*margin-left: 15px;*/
     padding-left: 0;
-    padding-right: 25px;
     text-align: left;
+    border-bottom: 1px solid #999;
 }
 
 .flora-title {
@@ -17,16 +22,14 @@
     width: auto;
     font-weight: 800;
     border-bottom: 1px solid white;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
-
 
 .flora-title-icon {
     float: right
 }
 
 .flora-wrapper {
-    /*width: 300px;*/
     width: auto;
     color: white;
     margin-left: auto;
@@ -38,8 +41,14 @@
     font-weight: 400;
     font-size: 16pt;
     padding-top: 10px;
-    padding-bottom: 15px;
-    padding-right: 25px;
+    padding-bottom: 0;
+}
+
+.flora-comment-cell {
+    font-weight: 300;
+    font-size: 13pt;
+    color: grey;
+    padding-bottom: 10px;
     border-bottom: 1px solid #999;
 }
 
@@ -51,20 +60,16 @@
     color: #ff0123;
 }
 
+.flora-inner-cell-padding {
+    padding-right: 15px;
+}
 
-.flora-row {
-    border-bottom: 1px solid white;
-    padding-bottom: 50px;
-    border-bottom: 1px solid #999;
+.flora-outer-cell-padding {
+    padding-right: 5px;
 }
 
 .flora-table {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     margin-top: 10px;
+    table-layout: auto;
 }
-
-
-/*td, th {*/
-/*    border-bottom: 1px solid #999;*/
-/*    padding: 0.5rem;*/
-/*}*/
