@@ -9,7 +9,7 @@ sufficient moisture and light.
 
 ![One Sensor](.github/one_sensor.png)
 ![Many Sensors](.github/many_sensors.png)
-![MiFlora Sensor](.github/miflora_sensor.jpg)
+<img src=".github/miflora_sensor.jpg"  width="256">
 
 ## Installation
 
