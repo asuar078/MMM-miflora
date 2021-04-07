@@ -38,84 +38,84 @@ Module.register("MMM-miflora", {
             unit: '%'
         }
 
-        this.sensorValues = []
-        // this.sensorValues = [
-        //     {
-        //         address: 'c4:7c:8d:6b:ca:9e',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 5.0, lux: 500, moisture: 5, fertility: 0},
-        //         friendlyName: 'lavender',
-        //         timeStamp: 1615157554387
-        //     },
-        //     {
-        //         address: 'c4:7c:8d:6b:cc:be',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 40, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 10.5, lux: 2000, moisture: 15, fertility: 0},
-        //         friendlyName: 'Potato',
-        //         timeStamp: Date.now()
-        //     },
-        //     {
-        //         address: 'c4:7c:8d:3c:cb:73',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 95, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 20.9, lux: 5000, moisture: 30, fertility: 10},
-        //         friendlyName: 'c4:7c:8d:3c:cb:73',
-        //         timeStamp: Date.now()
-        //     },
-        //     {
-        //         address: 'c4:8c:ad:6b:ca:9e',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 32.4, lux: 12000, moisture: 45, fertility: 0},
-        //         friendlyName: 'Snow ball',
-        //         timeStamp: 1615157554387
-        //     },
-        //     {
-        //         address: 'c4:7c:8d:6b:cc:be',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 70, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 45.4, lux: 70000, moisture: 60, fertility: 0},
-        //         friendlyName: 'Gary',
-        //         timeStamp: Date.now()
-        //     },
-        //     {
-        //         address: 'c4:7c:8d:3c:cb:76',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 95, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 27.4, lux: 8000, moisture: 70, fertility: 10},
-        //         friendlyName: 'c4:7c:8d:3c:cb:76',
-        //         timeStamp: Date.now()
-        //     },
-        //     {
-        //         address: 'c4:8c:ad:6b:ca:9e',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 22.4, lux: 82000, moisture: 80, fertility: 0},
-        //         friendlyName: 'Snow ball II',
-        //         timeStamp: 1615157554387
-        //     },
-        //     {
-        //         address: 'c4:7c:8d:6b:cc:be',
-        //         type: 'MiFloraMonitor',
-        //         firmwareInfo: {battery: 4, firmware: '3.2.4'},
-        //         sensorValues: {temperature: 14.1, lux: 70000, moisture: 86, fertility: 0},
-        //         friendlyName: 'Patrick',
-        //         timeStamp: Date.now()
-        //     },
-        // ]
+        // this.sensorValues = []
+        this.sensorValues = [
+            {
+                address: 'c4:7c:8d:6b:ca:9e',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 100, firmware: '3.2.4'},
+                sensorValues: {temperature: 5.0, lux: 500, moisture: 5, fertility: 0},
+                friendlyName: 'lavender',
+                timeStamp: 1615157554387
+            },
+            {
+                address: 'c4:7c:8d:6b:cc:be',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 40, firmware: '3.2.4'},
+                sensorValues: {temperature: 10.5, lux: 2000, moisture: 15, fertility: 0},
+                friendlyName: 'Potato',
+                timeStamp: Date.now()
+            },
+            {
+                address: 'c4:7c:8d:3c:cb:73',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 95, firmware: '3.2.4'},
+                sensorValues: {temperature: 20.9, lux: 5000, moisture: 30, fertility: 10},
+                friendlyName: 'c4:7c:8d:3c:cb:73',
+                timeStamp: Date.now()
+            },
+            {
+                address: 'c4:8c:ad:6b:ca:9e',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 100, firmware: '3.2.4'},
+                sensorValues: {temperature: 32.4, lux: 12000, moisture: 45, fertility: 0},
+                friendlyName: 'Snow ball',
+                timeStamp: 1615157554387
+            },
+            {
+                address: 'c4:7c:8d:6b:cc:be',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 70, firmware: '3.2.4'},
+                sensorValues: {temperature: 45.4, lux: 70000, moisture: 60, fertility: 0},
+                friendlyName: 'Gary',
+                timeStamp: Date.now()
+            },
+            {
+                address: 'c4:7c:8d:3c:cb:76',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 95, firmware: '3.2.4'},
+                sensorValues: {temperature: 27.4, lux: 8000, moisture: 70, fertility: 10},
+                friendlyName: 'c4:7c:8d:3c:cb:76',
+                timeStamp: Date.now()
+            },
+            {
+                address: 'c4:8c:ad:6b:ca:9e',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 100, firmware: '3.2.4'},
+                sensorValues: {temperature: 22.4, lux: 82000, moisture: 80, fertility: 0},
+                friendlyName: 'Snow ball II',
+                timeStamp: 1615157554387
+            },
+            {
+                address: 'c4:7c:8d:6b:cc:be',
+                type: 'MiFloraMonitor',
+                firmwareInfo: {battery: 4, firmware: '3.2.4'},
+                sensorValues: {temperature: 14.1, lux: 70000, moisture: 86, fertility: 0},
+                friendlyName: 'Patrick',
+                timeStamp: Date.now()
+            },
+        ]
 
-        if (this.scanInterval === undefined) {
-            this.update();
-            this.scanInterval = setInterval(
-                this.update.bind(this),
-                this.config.updateInterval * 1000);
-        }
+        // if (this.scanInterval === undefined) {
+        //     this.update();
+        //     this.scanInterval = setInterval(
+        //         this.update.bind(this),
+        //         this.config.updateInterval * 1000);
+        // }
     },
 
     update: function () {
-        this.sendSocketNotification('DATA_REQUEST', this.config);
+        this.sendSocketNotification('MIFLORA_DATA_REQUEST', this.config);
     },
 
     getTimeDiffMin(timeStamp) {
@@ -127,10 +127,23 @@ Module.register("MMM-miflora", {
         return Math.abs(Math.round(diff));
     },
 
+    notificationReceived: function(notification, payload, sender) {
+        // if (sender) {
+        //     Log.log(this.name + " received a module notification: " + notification + " from sender: " + sender.name);
+        // } else {
+        //     Log.log(this.name + " received a system notification: " + notification);
+        // }
+
+        if (notification === 'MIFLORA_SCAN') {
+            Log.log("miflora scan message")
+            this.update()
+        }
+    },
+
     socketNotificationReceived: function (notification, payload) {
-        if (notification === 'DATA_RESPONSE') {
+        if (notification === 'MIFLORA_DATA_RESPONSE') {
             // Log.info(`Data response ${payload.sensorValues.length}`)
-            Log.info(payload)
+            // Log.info(payload)
 
             if (payload.sensorValues === undefined) {
                 this.updateDom()
@@ -145,10 +158,10 @@ Module.register("MMM-miflora", {
             for (const sensors of payload.sensorValues) {
                 let index = this.sensorValues.findIndex((entry) => entry.address.toLowerCase() === sensors.address.toLowerCase())
                 if (index === -1) {
-                    Log.info("adding new sensor")
+                    // Log.info("adding new sensor")
                     this.sensorValues.push(sensors)
                 } else {
-                    Log.info("replacing values")
+                    // Log.info("replacing values")
                     this.sensorValues[index] = sensors
                 }
             }
@@ -497,7 +510,7 @@ Module.register("MMM-miflora", {
         let timeCell = document.createElement("td");
 
         let timeDiff = this.getTimeDiffMin(sensors.timeStamp)
-        Log.info(`data time diff: ${timeDiff}`)
+        // Log.info(`data time diff: ${timeDiff}`)
         if (timeDiff > this.config.maxMsgTimeDiff_min) {
             timeCell.innerHTML = `> ${this.config.maxMsgTimeDiff_min} min`
             timeCell.className = "flora-cell flora-bad-data flora-outer-cell-padding";
@@ -512,7 +525,7 @@ Module.register("MMM-miflora", {
 
     // Override dom generator.
     getDom: function () {
-        Log.log("updating dom")
+        // Log.log("updating dom")
 
         let wrapper = document.createElement("div");
         wrapper.className = "flora-wrapper"

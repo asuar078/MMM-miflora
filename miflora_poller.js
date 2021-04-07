@@ -31,15 +31,52 @@ const defaultFriendlyLookup = () => {
     });
 }
 
-const updateFriendlyLookup = (address, name) => {
+const getFriendlyLookup = () => {
+
     if (!fs.existsSync(NAME_LOOKUP_FILE)) {
         console.log("file doesn't exit creating default")
         defaultFriendlyLookup()
     }
 
-    const data = fs.readFileSync(NAME_LOOKUP_FILE, 'utf8');
+    try {
+        const data = fs.readFileSync(NAME_LOOKUP_FILE, 'utf8');
+        return JSON.parse(data)
+    }
+    catch (e) {
+       console.log(e)
+    }
 
-    let friendly = JSON.parse(data); //now it an object
+    fs.unlinkSync(NAME_LOOKUP_FILE)
+    console.log("file is corrupted removing and resetting to default")
+    defaultFriendlyLookup()
+
+    const data = fs.readFileSync(NAME_LOOKUP_FILE, 'utf8');
+    return JSON.parse(data)
+}
+
+const editFriendlyLookup = (newLookup) => {
+
+    console.log(`new lookup: ${newLookup}`)
+
+    let friendly = []
+
+    for (let lookup of newLookup) {
+        const entry = new FriendlyName(lookup.address, lookup.name)
+        friendly.push(entry)
+    }
+
+    console.log(`final lookup: ${friendly}`)
+    const json = JSON.stringify(friendly)
+
+    fs.writeFileSync(NAME_LOOKUP_FILE, json, {
+        encoding: "utf8",
+        flag: "w",
+        mode: 0o666
+    });
+}
+
+const updateFriendlyLookup = (address, name) => {
+    let friendly = getFriendlyLookup()
     let index = friendly.lookup.findIndex((entry) => entry.address.toLowerCase() === address.toLowerCase())
 
     if (index === -1) {
@@ -60,20 +97,12 @@ const updateFriendlyLookup = (address, name) => {
 }
 
 const friendlyNameLookup = (address) => {
-
-    // console.log('Current directory: ' + process.cwd());
-    if (!fs.existsSync(NAME_LOOKUP_FILE)) {
-        console.log("file doesn't exit creating default")
-        defaultFriendlyLookup()
-    }
-
-    const data = fs.readFileSync(NAME_LOOKUP_FILE, 'utf8');
-
-    let friendly = JSON.parse(data); //now it an object
+    let friendly = getFriendlyLookup()
     let index = friendly.lookup.findIndex((entry) => entry.address.toLowerCase() === address.toLowerCase())
 
     if (index === -1) {
         console.log("entry not found")
+        updateFriendlyLookup(address, address)
         return address
     } else {
         console.log("found entry")
@@ -121,15 +150,21 @@ const scan = async () => {
 }
 
 module.exports.scan = scan;
+module.exports.getFriendlyLookup = getFriendlyLookup ;
 module.exports.updateFriendlyLookup = updateFriendlyLookup;
+module.exports.editFriendlyLookup = editFriendlyLookup;
 
 // updateFriendlyLookup('c4:7c:8d:6b:ca:9e', 'tomato')
 // updateFriendlyLookup('c4:7c:8d:6b:ca:9f', 'potato')
 // let name = friendlyNameLookup('c4:7c:8d:6b:ca:9e')
 // console.log(`got name: ${name}`)
 //
-// name = friendlyNameLookup('c4:7c:8d:6b:ca:9F')
+// name = friendlyNameLookup('c4:7c:8d:6b:ca:9f')
 // console.log(`got name: ${name}`)
+//
+// updateFriendlyLookup('c4:7c:8d:6b:ca:9e', 'tomato')
+// updateFriendlyLookup('c4:7c:8d:6b:ca:9f', 'potato')
+// process.exit();
 
 // scan().then((values) => {
 //     console.log(`got: ${values.sensor_values[0].friendlyName}`)
