@@ -38,80 +38,80 @@ Module.register("MMM-miflora", {
             unit: '%'
         }
 
-        // this.sensorValues = []
-        this.sensorValues = [
-            {
-                address: 'c4:7c:8d:6b:ca:9e',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 100, firmware: '3.2.4'},
-                sensorValues: {temperature: 5.0, lux: 500, moisture: 5, fertility: 0},
-                friendlyName: 'lavender',
-                timeStamp: 1615157554387
-            },
-            {
-                address: 'c4:7c:8d:6b:cc:be',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 40, firmware: '3.2.4'},
-                sensorValues: {temperature: 10.5, lux: 2000, moisture: 15, fertility: 0},
-                friendlyName: 'Potato',
-                timeStamp: Date.now()
-            },
-            {
-                address: 'c4:7c:8d:3c:cb:73',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 95, firmware: '3.2.4'},
-                sensorValues: {temperature: 20.9, lux: 5000, moisture: 30, fertility: 10},
-                friendlyName: 'c4:7c:8d:3c:cb:73',
-                timeStamp: Date.now()
-            },
-            {
-                address: 'c4:8c:ad:6b:ca:9e',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 100, firmware: '3.2.4'},
-                sensorValues: {temperature: 32.4, lux: 12000, moisture: 45, fertility: 0},
-                friendlyName: 'Snow ball',
-                timeStamp: 1615157554387
-            },
-            {
-                address: 'c4:7c:8d:6b:cc:be',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 70, firmware: '3.2.4'},
-                sensorValues: {temperature: 45.4, lux: 70000, moisture: 60, fertility: 0},
-                friendlyName: 'Gary',
-                timeStamp: Date.now()
-            },
-            {
-                address: 'c4:7c:8d:3c:cb:76',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 95, firmware: '3.2.4'},
-                sensorValues: {temperature: 27.4, lux: 8000, moisture: 70, fertility: 10},
-                friendlyName: 'c4:7c:8d:3c:cb:76',
-                timeStamp: Date.now()
-            },
-            {
-                address: 'c4:8c:ad:6b:ca:9e',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 100, firmware: '3.2.4'},
-                sensorValues: {temperature: 22.4, lux: 82000, moisture: 80, fertility: 0},
-                friendlyName: 'Snow ball II',
-                timeStamp: 1615157554387
-            },
-            {
-                address: 'c4:7c:8d:6b:cc:be',
-                type: 'MiFloraMonitor',
-                firmwareInfo: {battery: 4, firmware: '3.2.4'},
-                sensorValues: {temperature: 14.1, lux: 70000, moisture: 86, fertility: 0},
-                friendlyName: 'Patrick',
-                timeStamp: Date.now()
-            },
-        ]
+        this.sensorValues = []
+        // this.sensorValues = [
+        //     {
+        //         address: 'c4:7c:8d:6b:ca:9e',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 5.0, lux: 500, moisture: 5, fertility: 0},
+        //         friendlyName: 'lavender',
+        //         timeStamp: 1615157554387
+        //     },
+        //     {
+        //         address: 'c4:7c:8d:6b:cc:be',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 40, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 10.5, lux: 2000, moisture: 15, fertility: 0},
+        //         friendlyName: 'Potato',
+        //         timeStamp: Date.now()
+        //     },
+        //     {
+        //         address: 'c4:7c:8d:3c:cb:73',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 95, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 20.9, lux: 5000, moisture: 30, fertility: 10},
+        //         friendlyName: 'c4:7c:8d:3c:cb:73',
+        //         timeStamp: Date.now()
+        //     },
+        //     {
+        //         address: 'c4:8c:ad:6b:ca:9e',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 32.4, lux: 12000, moisture: 45, fertility: 0},
+        //         friendlyName: 'Snow ball',
+        //         timeStamp: 1615157554387
+        //     },
+        //     {
+        //         address: 'c4:7c:8d:6b:cc:be',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 70, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 45.4, lux: 70000, moisture: 60, fertility: 0},
+        //         friendlyName: 'Gary',
+        //         timeStamp: Date.now()
+        //     },
+        //     {
+        //         address: 'c4:7c:8d:3c:cb:76',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 95, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 27.4, lux: 8000, moisture: 70, fertility: 10},
+        //         friendlyName: 'c4:7c:8d:3c:cb:76',
+        //         timeStamp: Date.now()
+        //     },
+        //     {
+        //         address: 'c4:8c:ad:6b:ca:9e',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 100, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 22.4, lux: 82000, moisture: 80, fertility: 0},
+        //         friendlyName: 'Snow ball II',
+        //         timeStamp: 1615157554387
+        //     },
+        //     {
+        //         address: 'c4:7c:8d:6b:cc:be',
+        //         type: 'MiFloraMonitor',
+        //         firmwareInfo: {battery: 4, firmware: '3.2.4'},
+        //         sensorValues: {temperature: 14.1, lux: 70000, moisture: 86, fertility: 0},
+        //         friendlyName: 'Patrick',
+        //         timeStamp: Date.now()
+        //     },
+        // ]
 
-        // if (this.scanInterval === undefined) {
-        //     this.update();
-        //     this.scanInterval = setInterval(
-        //         this.update.bind(this),
-        //         this.config.updateInterval * 1000);
-        // }
+        if (this.scanInterval === undefined) {
+            this.update();
+            this.scanInterval = setInterval(
+                this.update.bind(this),
+                this.config.updateInterval * 1000);
+        }
     },
 
     update: function () {

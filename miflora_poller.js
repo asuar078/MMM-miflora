@@ -56,16 +56,15 @@ const getFriendlyLookup = () => {
 
 const editFriendlyLookup = (newLookup) => {
 
-    console.log(`new lookup: ${newLookup}`)
-
-    let friendly = []
+    let friendly = {
+        lookup: []
+    }
 
     for (let lookup of newLookup) {
         const entry = new FriendlyName(lookup.address, lookup.name)
-        friendly.push(entry)
+        friendly.lookup.push(entry)
     }
 
-    console.log(`final lookup: ${friendly}`)
     const json = JSON.stringify(friendly)
 
     fs.writeFileSync(NAME_LOOKUP_FILE, json, {
