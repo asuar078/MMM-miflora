@@ -9,6 +9,7 @@
 
 const NodeHelper = require('node_helper');
 const poller = require('./miflora_poller')
+const { exec } = require("child_process");
 
 module.exports = NodeHelper.create({
     start: function () {
@@ -25,18 +26,43 @@ module.exports = NodeHelper.create({
                 console.log("scanning for sensors")
                 this.scanInProgress = true;
 
-                // execute scan
-                poller.scan()
-                    .then((sensorValues) => {
+                exec("/home/pi/MMM-miflora/scan.sh", (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`scan error ${error}`)
+                        this.scanInProgress = false;
+                        return;
+                    }
+                    if (stderr) {
+                        console.log(`scan error: ${stderr}`);
+                        this.scanInProgress = false;
+                        return;
+                    }
+                    try {
                         // Send data
+                        const sensorValues = JSON.parse(stdout)
                         console.log(`sending result: ${sensorValues}`)
                         self.sendSocketNotification('MIFLORA_DATA_RESPONSE', sensorValues);
 
                         this.scanInProgress = false;
-                    }).catch((e) => {
-                    console.log(`scan error ${e}`)
-                    this.scanInProgress = false;
-                })
+                    }
+                    catch (e) {
+                        console.log(e)
+                    }
+
+                });
+
+                // // execute scan
+                // poller.scan()
+                //     .then((sensorValues) => {
+                //         // Send data
+                //         console.log(`sending result: ${sensorValues}`)
+                //         self.sendSocketNotification('MIFLORA_DATA_RESPONSE', sensorValues);
+                //
+                //         this.scanInProgress = false;
+                //     }).catch((e) => {
+                //     console.log(`scan error ${e}`)
+                //     this.scanInProgress = false;
+                // })
             } else {
                 console.log("scan already in progress")
             }

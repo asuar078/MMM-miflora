@@ -1,7 +1,7 @@
 const miflora = require('miflora')
 const fs = require('fs');
 
-const NAME_LOOKUP_FILE = './modules/MMM-miflora/friendlyNameLookup.json'
+const NAME_LOOKUP_FILE = '/home/pi/MagicMirror/modules/MMM-miflora/friendlyNameLookup.json'
 // const NAME_LOOKUP_FILE = 'friendlyNameLookup.json'
 
 // const createFriendlyName = (address, name) => {
@@ -34,7 +34,7 @@ const defaultFriendlyLookup = () => {
 const getFriendlyLookup = () => {
 
     if (!fs.existsSync(NAME_LOOKUP_FILE)) {
-        console.log("file doesn't exit creating default")
+        // console.log("file doesn't exit creating default")
         defaultFriendlyLookup()
     }
 
@@ -43,11 +43,12 @@ const getFriendlyLookup = () => {
         return JSON.parse(data)
     }
     catch (e) {
-       console.log(e)
+       // console.log(e)
+        return;
     }
 
     fs.unlinkSync(NAME_LOOKUP_FILE)
-    console.log("file is corrupted removing and resetting to default")
+    // console.log("file is corrupted removing and resetting to default")
     defaultFriendlyLookup()
 
     const data = fs.readFileSync(NAME_LOOKUP_FILE, 'utf8');
@@ -79,10 +80,10 @@ const updateFriendlyLookup = (address, name) => {
     let index = friendly.lookup.findIndex((entry) => entry.address.toLowerCase() === address.toLowerCase())
 
     if (index === -1) {
-        console.log("not found adding new entry")
+        // console.log("not found adding new entry")
         friendly.lookup.push(new FriendlyName(address, name))
     } else {
-        console.log("found updating entry")
+        // console.log("found updating entry")
         friendly.lookup[index].name = name
     }
 
@@ -100,58 +101,59 @@ const friendlyNameLookup = (address) => {
     let index = friendly.lookup.findIndex((entry) => entry.address.toLowerCase() === address.toLowerCase())
 
     if (index === -1) {
-        console.log("entry not found")
+        // console.log("entry not found")
         updateFriendlyLookup(address, address)
         return address
     } else {
-        console.log("found entry")
+        // console.log("found entry")
         return friendly.lookup[index].name
     }
 }
 
-const discoverOptions = {
-    duration: 10000
-}
+// const discoverOptions = {
+//     duration: 10000
+// }
+//
+// const scan = async () => {
+//     let sensorValues = []
+//     let devices = []
+//
+//     try {
+//         console.log('starting scan')
+//         devices = await miflora.discover(discoverOptions)
+//         console.log('devices discovered: ', devices.length)
+//         if (devices.length === 0) {
+//             return []
+//         }
+//     } catch (e) {
+//         console.log(`discovery error ${e}`)
+//         return []
+//     }
+//
+//
+//     for (let dev of devices) {
+//         try {
+//             console.log(`query: ${dev.address}`)
+//             const query = await dev.query()
+//             query.friendlyName = friendlyNameLookup(query.address)
+//             query.timeStamp = Date.now()
+//             console.log(query)
+//             sensorValues.push(query)
+//
+//         } catch (e) {
+//             console.log(`query error ${e}`)
+//         }
+//     }
+//
+//     console.log(sensorValues)
+//     return {sensorValues}
+// }
 
-const scan = async () => {
-    let sensorValues = []
-    let devices = []
-
-    try {
-        console.log('starting scan')
-        devices = await miflora.discover(discoverOptions)
-        console.log('devices discovered: ', devices.length)
-        if (devices.length === 0) {
-            return []
-        }
-    } catch (e) {
-        console.log(`discovery error ${e}`)
-        return []
-    }
-
-
-    for (let dev of devices) {
-        try {
-            console.log(`query: ${dev.address}`)
-            const query = await dev.query()
-            query.friendlyName = friendlyNameLookup(query.address)
-            query.timeStamp = Date.now()
-            console.log(query)
-            sensorValues.push(query)
-
-        } catch (e) {
-            console.log(`query error ${e}`)
-        }
-    }
-
-    console.log(sensorValues)
-    return {sensorValues}
-}
-
-module.exports.scan = scan;
+// module.exports.scan = scan;
 module.exports.getFriendlyLookup = getFriendlyLookup ;
 module.exports.updateFriendlyLookup = updateFriendlyLookup;
 module.exports.editFriendlyLookup = editFriendlyLookup;
+module.exports.friendlyNameLookup = friendlyNameLookup;
 
 // updateFriendlyLookup('c4:7c:8d:6b:ca:9e', 'tomato')
 // updateFriendlyLookup('c4:7c:8d:6b:ca:9f', 'potato')
