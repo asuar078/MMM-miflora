@@ -41,6 +41,10 @@ npm install
 },
 ```
 
+I've had issues with conflicting node versions with electron. To prevent error install the miflora module on the magic mirror top level and follow the [electron rebuild instructions](https://www.electronjs.org/docs/tutorial/using-native-node-modules) below to rebuild. 
+
+
+
 ## Configuration Options
 
 | Configuration   | Description |
