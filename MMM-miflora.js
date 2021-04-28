@@ -3,7 +3,6 @@ Module.register("MMM-miflora", {
     defaults: {
         updateInterval: 60, // Seconds
         titleText: "Plant Life",
-        // units: "metric",
         units: "imperial",
         tableClass: "small",
         decimalSymbol: ".",
@@ -150,11 +149,12 @@ Module.register("MMM-miflora", {
                 return;
             }
 
-            if (payload.sensorValues.length === 0) {
-                this.updateDom()
-                return;
-            }
+            // if (payload.sensorValues.length === 0) {
+            //     this.updateDom()
+            //     return;
+            // }
 
+            // update sensor values
             for (const sensors of payload.sensorValues) {
                 let index = this.sensorValues.findIndex((entry) => entry.address.toLowerCase() === sensors.address.toLowerCase())
                 if (index === -1) {
@@ -163,6 +163,13 @@ Module.register("MMM-miflora", {
                 } else {
                     // Log.info("replacing values")
                     this.sensorValues[index] = sensors
+                }
+            }
+
+            // remove sensor if data hasn't been updated in too long
+            for (let i = this.sensorValues.length - 1; i >= 0; --i) {
+                if (this.getTimeDiffMin(this.sensorValues[i].timeStamp) > (this.config.maxMsgTimeDiff_min * 2)) {
+                    this.sensorValues.splice(i, 1); // Remove even numbers
                 }
             }
 

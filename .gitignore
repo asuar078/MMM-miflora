@@ -117,3 +117,5 @@ dist
 
 # ide
 .idea
+
+venv

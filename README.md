@@ -13,20 +13,17 @@ sufficient moisture and light.
 
 ## Installation
 
-- (1) Install the following bluetooth packages and allow non-root access.
+- (1) Install the following bluetooth and dev packages:
 ```bash
-sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev
-sudo setcap cap_net_raw+eip $(eval readlink -f `which node`)
+sudo apt-get install bluetooth bluez libbluetooth-dev libudev-dev libglib2.0-dev
 ```
-
-Please refer to the [Noble instructions for running on Linux](https://github.com/noble/noble#running-on-linux).
 
 - (2) Clone this repository in your `modules` folder, and install dependencies:
 ```bash
 cd ~/MagicMirror/modules # adapt directory if you are using a different one
 git clone https://github.com/asuar078/MMM-miflora.git
-cd MMM-miflora
-npm install
+cd MMM-miflora/miflora_scanner
+sudo pip3 install -r requirements.txt
 ```
 
 - (3) Add the module to your `config/config.js` file.
@@ -40,9 +37,6 @@ npm install
     }
 },
 ```
-
-I've had issues with conflicting node versions with electron. To prevent error install the miflora module on the magic mirror top level and follow the [electron rebuild instructions](https://www.electronjs.org/docs/tutorial/using-native-node-modules) below to rebuild. 
-
 
 
 ## Configuration Options
@@ -60,18 +54,16 @@ The following is a sample of the data that is received from the MiFlora Monitor.
 
 ```javascript
 [ { address: 'c4:7c:8d:6b:ca:9e',
-    type: 'MiFloraMonitor',
     firmwareInfo: { battery: 100, firmware: '3.2.4' },
     sensorValues: { temperature: 22.4, lux: 230, moisture: 0, fertility: 0 },
     friendlyName: 'lavender',
     timeStamp: 1614954202204 } ]
-
 ```
 
 ## Values Explained
 
 The extension pull temperature, lux, moisture and battery level from the MiFlora Monitor. 
-On the table each value is shown with a recommend range on top and a basic explanation of what 
+On the table each value is shown with a recommend range on top, and a basic explanation of what 
 it means as a comment on the bottom. For example a light value of 5 kiloLUX would fall into the 
 medium light category with is perfect for plants that want medium light. 
 
@@ -83,7 +75,7 @@ battery level, and lastly the last time a message was received from the sensor.
 
 When a new sensor is found the address is added to a json file named `friendlyNameLookup.json`.
 To change from the address name on the table replace the `name` field on the entry with whatever
-friendly name you like. There is a 30 character limit.
+friendly name you like. There is a 30-character limit.
 
 ```json
 {
