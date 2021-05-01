@@ -1,7 +1,7 @@
 Module.register("MMM-miflora", {
     // Default module config.
     defaults: {
-        updateInterval: 60, // Seconds
+        updateInterval: 600, // Seconds
         titleText: "Plant Life",
         units: "imperial",
         tableClass: "small",
