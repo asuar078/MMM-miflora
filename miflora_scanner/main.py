@@ -37,21 +37,25 @@ def main():
         sensors = []
 
         for mac in scan_result:
-            poller = MiFloraPoller(mac, BluepyBackend, cache_timeout=60)
-            temp = poller.parameter_value(MI_TEMPERATURE)
-            moisture = poller.parameter_value(MI_MOISTURE)
-            light = poller.parameter_value(MI_LIGHT)
-            fer = poller.parameter_value(MI_CONDUCTIVITY)
-            battery = poller.parameter_value(MI_BATTERY)
-            firmware = poller.firmware_version()
-            # print(f'temp: {temp}, moisture: {moisture}, light: {light}, battery: {battery}')
-            miflora_sensor = {
-                'address': mac,
-                'firmwareInfo': {'battery': battery, 'firmware': firmware},
-                'sensorValues': {'temperature': temp, 'lux': light, 'moisture': moisture, 'fertility': fer},
-            }
+            try:
+                poller = MiFloraPoller(mac, BluepyBackend, cache_timeout=60)
+                temp = poller.parameter_value(MI_TEMPERATURE)
+                moisture = poller.parameter_value(MI_MOISTURE)
+                light = poller.parameter_value(MI_LIGHT)
+                fer = poller.parameter_value(MI_CONDUCTIVITY)
+                battery = poller.parameter_value(MI_BATTERY)
+                firmware = poller.firmware_version()
+                # print(f'temp: {temp}, moisture: {moisture}, light: {light}, battery: {battery}')
+                miflora_sensor = {
+                    'address': mac,
+                    'firmwareInfo': {'battery': battery, 'firmware': firmware},
+                    'sensorValues': {'temperature': temp, 'lux': light, 'moisture': moisture, 'fertility': fer},
+                }
 
-            sensors.append(miflora_sensor)
+                sensors.append(miflora_sensor)
+
+            except Exception as error:
+                continue
 
         print_to_stdout(json.dumps(sensors))
 
