@@ -59,7 +59,7 @@ var config = {
     config: {
       weatherProvider: 'openweathermap',
       locationID: '4168618',
-      apiKey: "25a29c375f2ab1a6170a43752c7a3560",
+      apiKey: "your-api-key",
       type: 'current',
       units: UserConfig.units,
       timeFormat: UserConfig.timeFormat,
@@ -72,7 +72,7 @@ var config = {
     config: {
       weatherProvider: 'openweathermap',
       locationID: '4168618',
-      apiKey: "25a29c375f2ab1a6170a43752c7a3560",
+      apiKey: "your-api-key",
       type: 'forecast',
       units: UserConfig.units,
       timeFormat: UserConfig.timeFormat,
